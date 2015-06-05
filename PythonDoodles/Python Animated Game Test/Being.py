@@ -1,7 +1,7 @@
 from Entity import Entity
 import Barrier
 import Constants
-
+import pygame
 class Being(Entity):
     def __init__(self,x,y,health,screen):
         self.health = health
@@ -9,7 +9,7 @@ class Being(Entity):
         self.moving = False
         self.idling = True
         self.jumping = False
-        self.falling = False
+        self.falling = True
         self.right = False
         
         self.leftBound = x
@@ -24,13 +24,24 @@ class Being(Entity):
         self.length = 0
         self.width = 0
 
+        self.speed = Constants.speed
         self.jumpTimer = Constants.jumpTimerMax
+        self.flinching = False
+        self.maxHealth = self.health
         super(Being,self).__init__(x,y,screen)
+        
+    def displayHud(self):
+        if(self.flinching):
+            hudColor = (255,0,0)
+        else:
+            hudColor = (255,255,0)
+        pygame.draw.rect(self.screen,hudColor,(self.x,self.y-30,self.maxHealth,30))
+        pygame.draw.rect(self.screen,(0,0,255),(self.x,self.y-30,self.health,30))
     def update(self):
         if self.moving and self.right:
-            self.x+=Constants.speed
+            self.x+=self.speed
         elif self.moving and not self.right:
-            self.x-=Constants.speed
+            self.x-=self.speed
         if self.jumping and self.jumpTimer > 0:
             self.y-= int(Constants.gravity*5)
             self.jumpTimer -=1
@@ -58,25 +69,28 @@ class Being(Entity):
         if self.moving or self.jumping:
             self.idling = False
     def interact(self,otherEntity):
-
-        self.rightOb = False
-        self.leftOb = False
-        self.bottomOb = False
         if isinstance(otherEntity,Barrier.Barrier):
-            
+            if(self.bottomBound >= otherEntity.topBound and self.bottomBound - otherEntity.topBound < self.length/2.0 and (self.rightBound > otherEntity.leftBound or self.leftBound < otherEntity.rightBound)):
+                self.falling = False
+                self.y = otherEntity.topBound-self.length
+                self.bottomOb = True
+            else:
+                self.bottomOb = False
             if(self.moving and self.right and self.rightBound>=otherEntity.leftBound and (self.topBound<otherEntity.bottomBound and self.bottomBound>otherEntity.topBound)):
                 self.moving = False
                 self.updateState()
                 self.x = otherEntity.leftBound-self.width
                 self.rightOb = True
-                print('intersect right')
+                self.jumping = True
+##                print('intersect right')
             elif(self.moving and not self.right and self.leftBound<=otherEntity.rightBound and (self.topBound<otherEntity.bottomBound and self.bottomBound>otherEntity.topBound)):
                 self.moving = False
                 self.updateState()
                 self.x = otherEntity.rightBound
                 self.leftOb = True
-                print('intersect left')
-            elif(self.bottomBound >= otherEntity.topBound and self.bottomBound - otherEntity.topBound < self.length/2.0 and (self.rightBound > otherEntity.leftBound or self.leftBound < otherEntity.rightBound)):
-                self.falling = False
-                self.y = otherEntity.topBound-self.length
-                self.bottomOb = True
+                self.jumping = True
+##                print('intersect left')
+            else:
+                self.rightOb = False
+                self.leftOb = False
+            

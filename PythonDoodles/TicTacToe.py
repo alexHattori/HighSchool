@@ -356,8 +356,6 @@ while running:
         pygame.display.flip()
         if pygame.key.get_pressed()[pygame.K_SPACE] != 0:
             board = [[0 for i in xrange(3)] for i in xrange(3)]
-            im = pygame.image.load('Shrek.png')
-            img = pygame.transform.scale(im,(250,250))
             state = 1
             myTurn = 1==random.randint(0,1)
             turn = 1
