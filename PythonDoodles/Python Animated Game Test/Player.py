@@ -33,13 +33,14 @@ class Player(Being):
         if pygame.key.get_pressed()[pygame.K_UP] != 0 and not self.falling:
             self.jumping = True
         if pygame.key.get_pressed()[pygame.K_SPACE] != 0:
-            self.attacking = True
-            self.moving = True
-            self.idling = False
-            self.jumping = False
-            self.falling = False
-            self.speed = Constants.attackSpeed
-            self.health-=2
+            if self.right or self.x>0:
+                self.attacking = True
+                self.moving = True
+                self.idling = False
+                self.jumping = False
+                self.falling = False
+                self.speed = Constants.attackSpeed
+                self.health-=2
         super(Player,self).update()
         if not self.attacking:
             self.contactRect = pygame.Rect(self.x+15,self.y,60,130)
