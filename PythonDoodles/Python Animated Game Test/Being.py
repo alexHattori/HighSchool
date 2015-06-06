@@ -59,10 +59,8 @@ class Being(Entity):
 
         if self.y>Constants.screenHeight:
             self.dead = True
-            print('death by falls')
         elif self.health<=0:
             self.dead = True
-            print('no health')
     def updateState(self):
         if not self.moving and not self.jumping:
             self.idling = True
@@ -82,14 +80,12 @@ class Being(Entity):
                 self.x = otherEntity.leftBound-self.width
                 self.rightOb = True
                 self.jumping = True
-##                print('intersect right')
             elif(self.moving and not self.right and self.leftBound<=otherEntity.rightBound and (self.topBound<otherEntity.bottomBound and self.bottomBound>otherEntity.topBound)):
                 self.moving = False
                 self.updateState()
                 self.x = otherEntity.rightBound
                 self.leftOb = True
                 self.jumping = True
-##                print('intersect left')
             else:
                 self.rightOb = False
                 self.leftOb = False

@@ -32,7 +32,6 @@ def displayLabels(screen,texts,selected,startLoc = 320):
             label = myfont.render(options[a], 10,otherColor,(0,0,0))
         screen.blit(label, (350,(a*100)+startLoc))     
 while running:
-    time.sleep(0.03)
     screen.blit(sbg,(0,0))
     if state == 0:
         options = ["Start","Instructions","Quit"]
@@ -42,11 +41,13 @@ while running:
                 selected -= 1
             else:
                 selected = len(options)-1
+            time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
             if(selected == len(options)-1):
                 selected = 0
             else:
                 selected += 1
+            time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
             state = 1
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:

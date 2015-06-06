@@ -21,7 +21,7 @@ class Shrek(Enemy):
     def update(self):
         self.moving = False
         self.attacking = False
-        if(abs(self.x-self.target.x)>30):
+        if(abs(self.x-self.target.x)>10):
             if(self.x>self.target.x):
                 self.moving = True
                 self.right = False
