@@ -100,10 +100,12 @@ while running:
         generateTerrain(curVal,curVal+350)
         generateEnemies(curVal,curVal+350,screen,player)
         curVal+=200
+    if len(entities) == 1:
+        generateEnemies(0,700,screen,player)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-            pygame.display.quit()
+##            pygame.display.quit()
             pygame.mixer.music.stop()
         if event.type == pygame.MOUSEBUTTONUP:
             (mouseX, mouseY) = pygame.mouse.get_pos()
