@@ -105,9 +105,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-##            pygame.display.quit()
             pygame.mixer.music.stop()
-        if event.type == pygame.MOUSEBUTTONUP:
-            (mouseX, mouseY) = pygame.mouse.get_pos()
-            s = Shrek.Shrek(mouseX,mouseY,100,screen,player)
-            entities.append(s)
+    if player.dead:
+        running = False
+        pygame.mixer.music.stop()
+        start = round(time.time()-start)
+

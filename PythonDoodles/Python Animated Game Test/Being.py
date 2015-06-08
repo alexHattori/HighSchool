@@ -34,9 +34,9 @@ class Being(Entity):
         if(self.flinching):
             hudColor = (255,0,0)
         else:
-            hudColor = (255,255,0)
+            hudColor = (255,0,0)
         pygame.draw.rect(self.screen,hudColor,(self.x,self.y-30,self.maxHealth,30))
-        pygame.draw.rect(self.screen,(0,0,255),(self.x,self.y-30,self.health,30))
+        pygame.draw.rect(self.screen,(0,255,0),(self.x,self.y-30,self.health,30))
     def update(self):
         if self.moving and self.right:
             self.x+=self.speed

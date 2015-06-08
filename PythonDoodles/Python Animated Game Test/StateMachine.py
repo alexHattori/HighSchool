@@ -32,6 +32,7 @@ def displayLabels(screen,texts,selected,startLoc = 320):
             label = myfont.render(options[a], 10,otherColor,(0,0,0))
         screen.blit(label, (350,(a*100)+startLoc))     
 while running:
+    time.sleep(0.01)
     screen.blit(sbg,(0,0))
     if state == 0:
         options = ["Start","Instructions","Quit"]
@@ -53,13 +54,14 @@ while running:
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
             state = 2
             selected = 0
+            time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 2:
             running = False
             break;
         
     elif state == 1:
         execfile("GameMain.py")
-        state = 0
+        state = 3
         running = True
     elif state == 2:
         options = ["Start","Quit"]
@@ -78,17 +80,44 @@ while running:
                 selected -= 1
             else:
                 selected = len(options)-1
+            time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
             if(selected == len(options)-1):
                 selected = 0
             else:
                 selected += 1
+            time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
             state = 1
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
             running = False
             break;
-        
+    elif state == 3:
+        options = ["Replay","Quit"]
+        displayLabels(screen,options,selected,500)
+        stri = "Game Ogre"
+        stri2 = "You survived "+ str(start) +" seconds"
+        lbl1 = myfont.render(stri,10,(0,255,0),(255,255,255))
+        lbl2 = myfont.render(stri2,10,(0,255,0),(255,255,255))
+        screen.blit(lbl1,(0,0))
+        screen.blit(lbl2,(0,75))
+        if pygame.key.get_pressed()[pygame.K_UP] != 0:
+            if(selected > 0):
+                selected -= 1
+            else:
+                selected = len(options)-1
+            time.sleep(0.02)
+        elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
+            if(selected == len(options)-1):
+                selected = 0
+            else:
+                selected += 1
+            time.sleep(0.02)
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
+            state = 1
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
+            running = False
+            break;
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
