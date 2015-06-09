@@ -127,12 +127,19 @@ while running:
     elif state == 3:
         options = ["Replay","Menu","Quit"]
         displayLabels(screen,options,selected,425)
+        score = distance/start
         stri = "Game Ogre"
         stri2 = "You survived "+ str(start) +" seconds"
+        stri3 = "You travelled " + str(distance) +" pxls"
+        stri4 = "Score: " + str(score)
         lbl1 = myfont.render(stri,10,(0,255,0),(255,255,255))
         lbl2 = myfont.render(stri2,10,(0,255,0),(255,255,255))
+        lbl3 = myfont.render(stri3,10,(0,255,0),(255,255,255))
+        lbl4 = myfont.render(stri4,10,(0,255,0),(255,255,255))
         screen.blit(lbl1,(0,0))
         screen.blit(lbl2,(0,75))
+        screen.blit(lbl3,(0,150))
+        screen.blit(lbl4,(0,225))
         if pygame.key.get_pressed()[pygame.K_UP] != 0:
             if(selected > 0):
                 selected -= 1

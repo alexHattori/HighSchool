@@ -64,6 +64,7 @@ generateEnemies(100,1000,screen,player)
 curVal = 1000
 start = time.time()
 t = 0
+distance = 0
 while running:
     screen.blit(sbg,bgLoc)
     if(not player.dead):
@@ -94,6 +95,7 @@ while running:
     if offset>=0:
         shiftWorld(offset)
         curVal-=offset
+        distance+=offset
     pygame.display.flip()
     if curVal<=1000:
         generateTerrain(curVal,curVal+350)
@@ -109,4 +111,5 @@ while running:
         running = False
         pygame.mixer.music.stop()
         start = round(time.time()-start)
+        distance+=player.x
 
