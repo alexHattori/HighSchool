@@ -1,6 +1,9 @@
 import pygame
 import time
 import Constants
+import Shrek
+import Player
+import random
 
 background_color = (0,0,255)
 colorInt = 0;
@@ -11,7 +14,6 @@ screen = pygame.display.set_mode((width, height))
 running = True
 pygame.init()
 
-
 myfont = pygame.font.SysFont("monospace", 72)
 state = 0
 selected = 0
@@ -21,6 +23,8 @@ running = True
 bg = pygame.image.load('background.png')
 sbg = pygame.transform.scale(bg,(width,height))
 
+funs = []
+p = Player.Player(-10,0,95,screen)
 def displayLabels(screen,texts,selected,startLoc = 320):
     labels = []
     selectedColor = (0,255,0)
@@ -35,9 +39,22 @@ def displayLabels(screen,texts,selected,startLoc = 320):
 while running:
     time.sleep(0.01)
     screen.blit(sbg,(0,0))
+    for x in funs:
+        if(x.dead):
+            funs.remove(x)
+        else:
+            x.update()
+            x.display()
+    x = random.randint(0,1000)
+    y = 0
+    s = Shrek.Shrek(x,y,95,screen,p)
+    funs.append(s)
     if state == 0:
+        stri = "The Shrekoning"
+        label = myfont.render(stri,10,(0,255,0),(0,0,0))
+        screen.blit(label,(200,0))
         options = ["Start","Instructions","Quit"]
-        displayLabels(screen,options,selected)
+        displayLabels(screen,options,selected,420)
         if pygame.key.get_pressed()[pygame.K_UP] != 0:
             if(selected > 0):
                 selected -= 1
@@ -127,7 +144,7 @@ while running:
     elif state == 3:
         options = ["Replay","Menu","Quit"]
         displayLabels(screen,options,selected,425)
-        score = distance/start
+        score = int((distance+(start*500))/1000)
         stri = "Game Ogre"
         stri2 = "You survived "+ str(start) +" seconds"
         stri3 = "You travelled " + str(distance) +" pxls"

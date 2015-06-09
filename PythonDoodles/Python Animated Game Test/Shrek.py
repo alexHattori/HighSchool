@@ -15,7 +15,7 @@ class Shrek(Enemy):
         self.width = 60
         self.length = 120
 
-        self.speed = self.speed/2
+        self.speed = self.speed*2
         self.attacking = False
         self.damage = 5
     def update(self):
