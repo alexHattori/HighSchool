@@ -1,5 +1,6 @@
 import pygame
 import time
+import Constants
 
 background_color = (0,0,255)
 colorInt = 0;
@@ -50,7 +51,8 @@ while running:
                 selected += 1
             time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
-            state = 1
+            state = 4
+            selected = 0
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
             state = 2
             selected = 0
@@ -58,13 +60,41 @@ while running:
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 2:
             running = False
             break;
-        
+        time.sleep(0.01)
+    elif state == 4:
+        options = ["Easy","Medium","Hard"]
+        displayLabels(screen,options,selected)
+        if pygame.key.get_pressed()[pygame.K_UP] != 0:
+            if(selected > 0):
+                selected -= 1
+            else:
+                selected = len(options)-1
+            time.sleep(0.02)
+        elif pygame.key.get_pressed()[pygame.K_DOWN] != 0:
+            if(selected == len(options)-1):
+                selected = 0
+            else:
+                selected += 1
+            time.sleep(0.02)
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
+            Constants.playerDamage = 95
+            state = 1
+            selected = 0
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
+            Constants.playerDamage = 20
+            state = 1
+            selected = 0
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 2:
+            Constants.playerDamage = 10
+            state = 1
+            selected = 0
+        time.sleep(0.01)
     elif state == 1:
         execfile("GameMain.py")
         state = 3
         running = True
     elif state == 2:
-        options = ["Start","Quit"]
+        options = ["Menu","Quit"]
         instr1 = "Use Arrow Keys to Move"
         instr2 = "Press Space to Attack"
         instr3 = "Survive"
@@ -88,13 +118,15 @@ while running:
                 selected += 1
             time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
-            state = 1
+            state = 0
+            selected = 0
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
             running = False
             break;
+        time.sleep(0.01)
     elif state == 3:
-        options = ["Replay","Quit"]
-        displayLabels(screen,options,selected,500)
+        options = ["Replay","Menu","Quit"]
+        displayLabels(screen,options,selected,425)
         stri = "Game Ogre"
         stri2 = "You survived "+ str(start) +" seconds"
         lbl1 = myfont.render(stri,10,(0,255,0),(255,255,255))
@@ -116,8 +148,12 @@ while running:
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
             state = 1
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
+            state = 0
+            selected = 0
+        elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 2:
             running = False
             break;
+        time.sleep(0.01)
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

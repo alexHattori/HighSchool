@@ -8,7 +8,6 @@ import Barrier
 import Player
 import Shrek
 
-
 (width, height) = (1000, 700)
 screen = pygame.display.set_mode((width, height))
 running = True

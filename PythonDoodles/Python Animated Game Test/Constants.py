@@ -13,7 +13,4 @@ jumpTimerMax = 5
 tileDim = 100
 flinchDist = 0
 
-playerDamage = 20
-
-laserSpeed = 10
-laserDamage = 5
+playerDamage = 95

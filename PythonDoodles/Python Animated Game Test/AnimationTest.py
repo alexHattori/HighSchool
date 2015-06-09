@@ -8,7 +8,9 @@ pygame.init()
 ##images = SpriteSheet.SpriteStripAnim('shrek.png',(290,60,40,60),3,-1,True)
 ##images = SpriteSheet.SpriteStripAnim('shrek.png',(0,73,45,50),6,-1,True)
 ##images = SpriteSheet.SpriteStripAnim('shrek.png',(5,440,50,50),6,-1,True)
-images = SpriteSheet.SpriteStripAnim('sonicSprites.png',(0,380,70,70),4,-1,True)
+##images = SpriteSheet.SpriteStripAnim('ClarkSprites.png',(115,0,50,65),9,-1,True)
+##images = SpriteSheet.SpriteStripAnim('ClarkSprites.png',(0,80,48,65),9,-1,True)
+images = SpriteSheet.SpriteStripAnim('ClarkSprites.png',(150,100,47,50),1,-1,True)
 
 while running:
     img = pygame.transform.scale(images.next(),(90,130))
