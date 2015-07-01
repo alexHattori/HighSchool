@@ -14,3 +14,4 @@ tileDim = 100
 flinchDist = 0
 
 playerDamage = 95
+shrekFactor = 0.5

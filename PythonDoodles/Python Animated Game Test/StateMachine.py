@@ -95,14 +95,17 @@ while running:
             time.sleep(0.02)
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 0:
             Constants.playerDamage = 95
+            Constants.shrekFactor = 0.5
             state = 1
             selected = 0
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 1:
             Constants.playerDamage = 20
+            Constants.shrekFactor = 1
             state = 1
             selected = 0
         elif pygame.key.get_pressed()[pygame.K_RETURN] != 0 and selected == 2:
             Constants.playerDamage = 10
+            Constants.shrekFactor = 2
             state = 1
             selected = 0
         time.sleep(0.01)
