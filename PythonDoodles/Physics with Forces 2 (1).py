@@ -181,6 +181,17 @@ while running:
                 collide(particle, particle2)
         particle.display()
     pygame.display.flip()
+    if pygame.key.get_pressed()[pygame.K_SPACE] != 0:
+            (mouseX, mouseY) = pygame.mouse.get_pos()
+            size = 1
+            density = 1000000
+            x = mouseX
+            y = mouseY
+            particle = Particle((x, y), size, density*size**2)
+            particle.speedx = 0
+            particle.speedy = 0
+            my_particles.append(particle)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False

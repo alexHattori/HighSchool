@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "GetShrekt.py", line 1, in <module>
+  File "zipextimporter.pyo", line 82, in load_module
+  File "StateMachine.pyo", line 23, in <module>
+pygame.error: Couldn't open background.png
+Traceback (most recent call last):
+  File "GetShrekt.py", line 1, in <module>
+  File "zipextimporter.pyo", line 82, in load_module
+  File "StateMachine.pyo", line 113, in <module>
+IOError: [Errno 2] No such file or directory: 'GameMain.py'
