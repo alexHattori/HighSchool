@@ -1,5 +1,5 @@
 
-import pygame,random,time
+import pygame,random,time,math
 
 background_colour = (0,0,0)
 (width, height) = (1000, 700)
@@ -36,20 +36,17 @@ class Explosion():
         self.x = x
         self.y = y
         self.color = color
-        self.prongs = 5
+        self.prongs = random.randint(5,20)
         self.particles = []
-        self.time = 100
-##        for x in range(0,self.prongs):
-        p1 = Particle(self.x,self.y,self.color,0,2)
-        p2 = Particle(self.x,self.y,self.color,2,1)
-        p3 = Particle(self.x,self.y,self.color,2,-1)
-        p4 = Particle(self.x,self.y,self.color,-2,-1)
-        p5 = Particle(self.x,self.y,self.color,-2,1)
-        self.particles.append(p1)
-        self.particles.append(p2)
-        self.particles.append(p3)
-        self.particles.append(p4)
-        self.particles.append(p5)
+        self.time = random.randint(20,100)
+        self.angle = math.radians(360/self.prongs)
+        self.startAngle = random.uniform(0,6.14)
+        for x in range(0,self.prongs):
+            curAngle = (x*self.angle)+self.startAngle
+            xd = math.cos(curAngle)
+            yd = math.sin(curAngle)
+            particle = Particle(self.x,self.y,self.color,xd,yd)
+            self.particles.append(particle)
     def update(self):
         for a in self.particles:
             a.update()
@@ -61,6 +58,8 @@ class Explosion():
             a.display()
 class Particle():
     def __init__(self,x,y,color,xd,yd):
+        self.startx = x
+        self.starty = y
         self.x = x
         self.y = y
         self.color = color
@@ -70,8 +69,7 @@ class Particle():
         self.x-=self.xd
         self.y-=self.yd
     def display(self):
-        rect = pygame.Rect(self.x,self.y,5,5)
-        pygame.draw.rect(screen,self.color,rect)
+        pygame.draw.line(screen,self.color,(self.startx,self.starty),(self.x,self.y))
 while running:
     time.sleep(0.01)
     screen.fill((0,0,0))
