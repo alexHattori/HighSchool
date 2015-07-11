@@ -77,12 +77,17 @@ while running:
         a.update()
         a.display()
     pygame.display.flip()
+    if pygame.key.get_pressed()[pygame.K_SPACE] != 0:
+        (mouseX, mouseY) = pygame.mouse.get_pos()
+        randCol = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
+        f = Firework(mouseX,randCol,random.randint(50,350))
+        items.append(f)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             pygame.display.quit()
-        elif event.type == pygame.MOUSEBUTTONUP:
-            (mouseX, mouseY) = pygame.mouse.get_pos()
-            randCol = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
-            f = Firework(mouseX,randCol,random.randint(50,350))
-            items.append(f)
+##        elif event.type == pygame.MOUSEBUTTONUP:
+##            (mouseX, mouseY) = pygame.mouse.get_pos()
+##            randCol = (random.randint(0,255),random.randint(0,255),random.randint(0,255))
+##            f = Firework(mouseX,randCol,random.randint(50,350))
+##            items.append(f)

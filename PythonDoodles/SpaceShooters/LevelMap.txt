@@ -1,0 +1,3 @@
+Level1:Invader(30),Player(60),Invader(70)
+Level2:Invader(40),Player(70)
+Level3:Invader(70)
