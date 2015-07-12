@@ -6,7 +6,7 @@ class Invader():
         self.y = 0
         self.dead = False
         self.right = True
-        self.speed = 1
+        self.speed = 3
         self.length = 30
         self.height = 30
         self.delay = 100

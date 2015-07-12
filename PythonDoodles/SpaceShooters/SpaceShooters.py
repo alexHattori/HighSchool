@@ -1,4 +1,4 @@
-import LevelManager,pygame,time
+import LevelManager,pygame,time,LevelEditor
 
 background_color = (0,0,0)
 (width,height) = (500,500)
@@ -20,8 +20,13 @@ DESIGN_LEVEL = 4
 QUIT = 5
 
 lvlMg = LevelManager.LevelManager(screen,width,height)
+lvlEd = LevelEditor.LevelEditor(screen,width,height)
 
 curLevel = ""
+bg = pygame.image.load('bg.jpg')
+sbg = pygame.transform.scale(bg,(width,height))
+bgLoc = (0,0)
+
 
 def displayLabels(screen,texts,selected):
     labels = []
@@ -31,7 +36,10 @@ def displayLabels(screen,texts,selected):
     otherColor = (255,0,0)
     startLoc = height-hei*len(texts)
     for a in range(0,len(texts)):
-        fontSize = width/len(options[a])
+        if len(texts)<=5:
+            fontSize = width/len(options[a])
+        else:
+            fontSize = (height/len(texts)) - 10
         myfont = pygame.font.SysFont("monospace", fontSize+20)
         if(a==selected):
             label = myfont.render(options[a], 10,selectedColor,(255,255,255))
@@ -53,7 +61,7 @@ def getLevelOptions():
 while running:
     time.sleep(0.01)
 
-    screen.fill(background_color)
+    screen.blit(sbg,bgLoc)
     
     if myState == MENU:
         pygame.display.set_caption('Space Shooters')
@@ -71,7 +79,11 @@ while running:
         displayLabels(screen,options,option)
     if myState == PLAY:
         pygame.display.set_caption('Space Shooters')
-        lvlMg.runLevel(curLevel)
+        val = lvlMg.runLevel(curLevel)
+        if val:
+            pygame.display.set_caption('You Lost')
+        else:
+            pygame.display.set_caption('You Won')
         myState = DONE
     if myState == DONE:
         options = ['Menu','Quit']
@@ -79,7 +91,9 @@ while running:
         if(option>=len(options)):
             option = 0
         displayLabels(screen,options,option)
-
+    if myState == DESIGN_LEVEL:
+        lvlEd.designLevel()
+        myState = MENU
     if myState == QUIT:
         running = False
 

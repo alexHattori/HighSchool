@@ -7,7 +7,9 @@ class LevelManager():
         self.screen = screen
         self.width = width
         self.height = height
-        self.background_color = (0,0,0)
+        self.bg = pygame.image.load('bg.jpg')
+        self.sbg = pygame.transform.scale(self.bg,(self.width,self.height))
+        self.bgLoc = (0,0)
     def winLevel(self,entities):
         for a in entities:
             if(isinstance(a,Invader)):
@@ -45,8 +47,7 @@ class LevelManager():
         entities = self.getEntities(name)
         while not(self.gameOver(entities) or self.winLevel(entities)):
             time.sleep(0.01)
-            self.screen.fill(self.background_color)
-
+            self.screen.blit(self.sbg,self.bgLoc)
             for a in entities:
                 if(a.dead):
                     entities.remove(a)
@@ -60,3 +61,4 @@ class LevelManager():
                     for x in entities:
                         if isinstance(x,Player):
                             entities.remove(x)
+        return self.gameOver(entities)
