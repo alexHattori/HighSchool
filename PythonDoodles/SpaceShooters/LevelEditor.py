@@ -14,7 +14,7 @@ class LevelEditor():
         self.sbg = pygame.transform.scale(self.bg,(self.width,self.height))
         self.bgLoc = (0,0)
         self.entities = []
-        p = Player(60,self.entities,screen,width,height)
+        p = Player(60,-1,self.entities,screen,width,height)
         self.entities.append(p)
         self.name = ""
         self.types = ['Invader']
@@ -26,14 +26,16 @@ class LevelEditor():
             text+= x.__class__.__name__
             text+=('(')
             text+=str(x.x)
+            text+=(';')
+            text+=str(x.y)
             text+=('),')
         text = text[:-1]
         file.write(text)
-    def validLoc(self,x,entities):
+    def validLoc(self,x,y,entities):
         for e in entities:
             if not isinstance(e,Player):
                 rect = pygame.Rect(e.x,e.y,e.length,e.height)
-                newRect = pygame.Rect(x,e.y,e.length,e.height)
+                newRect = pygame.Rect(x,y,e.length,e.height)
                 if rect.colliderect(newRect):
                     return False
         return True
@@ -53,10 +55,10 @@ class LevelEditor():
                     if event.key == pygame.K_SPACE:
                         running = False
                         self.saveLevel()
-                        self.entities = [Player(60,self.entities,self.screen,self.width,self.height)]
+                        self.entities = [Player(60,-1,self.entities,self.screen,self.width,self.height)]
                     for i in range(0,len(self.keys)):
                         x = self.keys[i]
                         if event.key == x:                  
                             (mouseX,mouseY) = pygame.mouse.get_pos()
-                            if self.validLoc(mouseX,self.entities):
-                                self.entities.append(strToClass(self.types[i])(mouseX,self.entities,self.screen,self.width,self.height))
+                            if self.validLoc(mouseX,mouseY,self.entities):
+                                self.entities.append(strToClass(self.types[i])(mouseX,mouseY,self.entities,self.screen,self.width,self.height))

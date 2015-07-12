@@ -4,10 +4,10 @@ import pygame,random,math,time
 ## WHEN ADDING CHARACTERS, APPEND Types and Keys to LevelEditor
 
 
-class Invader():
-    def __init__(self,x,entities,screen,screenWidth,screenHeight):
+class Invader(object):
+    def __init__(self,x,y,entities,screen,screenWidth,screenHeight):
         self.x = x
-        self.y = 0
+        self.y = y
         self.dead = False
         self.right = True
         self.speed = 3
@@ -43,7 +43,7 @@ class Invader():
             if(b.rect.colliderect(self.rect) and isinstance(b,Invader) and b!= self):
                 self.right = not self.right
 
-class Laser():
+class Laser(object):
     def __init__(self,x,y,player,entities,screen,screenWidth,screenHeight):
         self.x = x
         self.y = y
@@ -80,12 +80,14 @@ class Laser():
             if(isinstance(b,Player)):
                 if(b.rect.colliderect(self.rect) and not self.player):
                     b.dead = True
+                    self.dead = True
             elif(isinstance(b,Invader)):
                 if(b.rect.colliderect(self.rect) and self.player):
                     b.dead = True
+                    self.dead = True
 
-class Player():
-    def __init__(self,x,entities,screen,screenWidth,screenHeight):
+class Player(object):
+    def __init__(self,x,y,entities,screen,screenWidth,screenHeight):
         self.length = 30
         self.height = 30
         self.x = x

@@ -22,8 +22,8 @@ class LevelManager():
             if(isinstance(a,Player)):
                return False
         return True
-    def createCharacter(self,entities,name,loc):
-        a = strToClass(name)(int(loc),entities,self.screen,self.width,self.height)
+    def createCharacter(self,entities,name,locx,locy):
+        a = strToClass(name)(int(locx),int(locy),entities,self.screen,self.width,self.height)
         entities.append(a)
     def getEntities(self,name):
         entities = []
@@ -37,8 +37,10 @@ class LevelManager():
                 for x in chars:
                     nameAndLoc = x.split('(')
                     name = nameAndLoc[0]
-                    loc = nameAndLoc[1][:-1]
-                    self.createCharacter(entities,name,loc)
+                    locs = nameAndLoc[1].split(';')
+                    locx = locs[0]
+                    locy = locs[1][:-1]
+                    self.createCharacter(entities,name,locx,locy)
         return entities
     def runLevel(self,name):
         entities = self.getEntities(name)
