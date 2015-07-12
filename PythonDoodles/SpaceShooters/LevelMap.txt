@@ -1,2 +1,3 @@
 Level1:Invader(30),Player(60),Invader(70)
 Level2:Invader(40),Player(70)
+tiffany:Player(60),Invader(23),Invader(131),Invader(307),Invader(456),Invader(219),Invader(393)

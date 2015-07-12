@@ -1,6 +1,7 @@
 import pygame,time
 from Characters import Invader,Laser,Player
 
+## TODO    Improve How Characters are Read IE: createCharacters
 
 class LevelManager():
     def __init__(self,screen,width,height):
@@ -40,7 +41,7 @@ class LevelManager():
                 for x in chars:
                     nameAndLoc = x.split('(')
                     name = nameAndLoc[0]
-                    loc = nameAndLoc[1][:2]
+                    loc = nameAndLoc[1][:-1]
                     self.createCharacter(entities,name,loc)
         return entities
     def runLevel(self,name):

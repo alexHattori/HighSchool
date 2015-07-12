@@ -1,6 +1,10 @@
 import pygame,time,inputbox
 from Characters import Invader,Player
 
+
+## TODO     Improve way characters are added in Event Loop - Key
+
+
 class LevelEditor():
     def __init__(self,screen,width,height):
         self.screen = screen
@@ -39,6 +43,6 @@ class LevelEditor():
                     if event.key == pygame.K_SPACE:
                         running = False
                         self.saveLevel()
-                    if event.key == pygame.K_1:
+                    if event.key == pygame.K_1:                  
                         (mouseX,mouseY) = pygame.mouse.get_pos()
                         self.entities.append(Invader(mouseX,self.entities,self.screen,self.width,self.height))
