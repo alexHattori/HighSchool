@@ -1,10 +1,10 @@
-import pygame,time,inputbox
+import pygame,time,inputbox,sys
 from Characters import Invader,Player
 
 
-## TODO     Improve way characters are added in Event Loop - Key
-
-
+## TODO Fix Overlapping Enemies
+def strToClass(str):
+    return getattr(sys.modules[__name__], str)
 class LevelEditor():
     def __init__(self,screen,width,height):
         self.screen = screen
@@ -17,6 +17,8 @@ class LevelEditor():
         p = Player(60,self.entities,screen,width,height)
         self.entities.append(p)
         self.name = ""
+        self.types = ['Invader']
+        self.keys = [pygame.K_1]
     def saveLevel(self):
         file = open('LevelMap.txt','a')
         text = "\n"+self.name+":"
@@ -27,6 +29,14 @@ class LevelEditor():
             text+=('),')
         text = text[:-1]
         file.write(text)
+    def validLoc(self,x,entities):
+        for e in entities:
+            if not isinstance(e,Player):
+                rect = pygame.Rect(e.x,e.y,e.length,e.height)
+                newRect = pygame.Rect(x,e.y,e.length,e.height)
+                if rect.colliderect(newRect):
+                    return False
+        return True
     def designLevel(self):
         running = True
         self.name = str(inputbox.ask(self.screen, 'Enter Level Name'))
@@ -43,6 +53,10 @@ class LevelEditor():
                     if event.key == pygame.K_SPACE:
                         running = False
                         self.saveLevel()
-                    if event.key == pygame.K_1:                  
-                        (mouseX,mouseY) = pygame.mouse.get_pos()
-                        self.entities.append(Invader(mouseX,self.entities,self.screen,self.width,self.height))
+                        self.entities = [Player(60,self.entities,self.screen,self.width,self.height)]
+                    for i in range(0,len(self.keys)):
+                        x = self.keys[i]
+                        if event.key == x:                  
+                            (mouseX,mouseY) = pygame.mouse.get_pos()
+                            if self.validLoc(mouseX,self.entities):
+                                self.entities.append(strToClass(self.types[i])(mouseX,self.entities,self.screen,self.width,self.height))

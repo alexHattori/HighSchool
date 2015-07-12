@@ -1,8 +1,8 @@
-import pygame,time
+import pygame,time,sys
 from Characters import Invader,Laser,Player
 
-## TODO    Improve How Characters are Read IE: createCharacters
-
+def strToClass(str):
+    return getattr(sys.modules[__name__], str)
 class LevelManager():
     def __init__(self,screen,width,height):
         self.screen = screen
@@ -23,12 +23,8 @@ class LevelManager():
                return False
         return True
     def createCharacter(self,entities,name,loc):
-        if(name == 'Invader'):
-            a = Invader(int(loc),entities,self.screen,self.width,self.height)
-            entities.append(a)
-        elif(name == 'Player'):
-            a = Player(int(loc),entities,self.screen,self.width,self.height)
-            entities.append(a)
+        a = strToClass(name)(int(loc),entities,self.screen,self.width,self.height)
+        entities.append(a)
     def getEntities(self,name):
         entities = []
         file = open('LevelMap.txt','r')

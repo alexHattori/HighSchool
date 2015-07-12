@@ -36,10 +36,10 @@ def displayLabels(screen,texts,selected):
     otherColor = (255,0,0)
     startLoc = height-hei*len(texts)
     for a in range(0,len(texts)):
-        if len(texts)<=5:
-            fontSize = width/len(options[a])
-        else:
-            fontSize = (height/len(texts)) - 10
+##        if len(texts)<=5:
+##            fontSize = width/len(options[a])
+##        else:
+        fontSize = (height/len(texts)) - 10
         myfont = pygame.font.SysFont("monospace", fontSize+20)
         if(a==selected):
             label = myfont.render(options[a], 10,selectedColor,(255,255,255))

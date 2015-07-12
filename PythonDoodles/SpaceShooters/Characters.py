@@ -1,5 +1,9 @@
 import pygame,random,math,time
 
+
+## WHEN ADDING CHARACTERS, APPEND Types and Keys to LevelEditor
+
+
 class Invader():
     def __init__(self,x,entities,screen,screenWidth,screenHeight):
         self.x = x
