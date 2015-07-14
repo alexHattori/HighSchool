@@ -72,13 +72,11 @@ class Dodger(Invader):
         for x in self.entities:
             if isinstance(x,Laser):
                 if x.player and (x.x+x.length>=xMin and x.x<=xMax):
-                    self.speed = 5
+                    self.speed = self.length
                     move = True
         if not move:
-            self.speed = 0
+            self.speed = 5
         super(Dodger,self).update()
-    def shoot(self):
-        return
     def display(self):
         self.rect = pygame.Rect(self.x,self.y,self.length,self.height)
         pygame.draw.rect(self.screen,(255,0,255),self.rect)
