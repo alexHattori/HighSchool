@@ -1,3 +1,0 @@
-level1:Player(60;470),Invader(56;58),Invader(129;77),Invader(160;83)
-hello world:Player(60;470),Invader(72;72),DeathRay(272;121),Invader(230;270),DeathRay(374;163),Invader(144;77),DeathRay(143;143),DeathRay(441;100),DeathRay(425;330),DeathRay(143;316),Invader(9;205),DeathRay(88;311),Invader(301;45),DeathRay(349;270)
-test:Player(60;470),Dodger(327;180),Dodger(230;286),Dodger(74;198),Invader(231;95),Invader(99;68),DeathRay(434;78)
