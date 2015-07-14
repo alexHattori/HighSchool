@@ -1,8 +1,6 @@
 import pygame,time,inputbox,sys
-from Characters import Invader,Player
+from Characters import Invader,Player,DeathRay,Dodger
 
-
-## TODO Fix Overlapping Enemies
 def strToClass(str):
     return getattr(sys.modules[__name__], str)
 class LevelEditor():
@@ -17,8 +15,8 @@ class LevelEditor():
         p = Player(60,-1,self.entities,screen,width,height)
         self.entities.append(p)
         self.name = ""
-        self.types = ['Invader']
-        self.keys = [pygame.K_1]
+        self.types = ['Invader','DeathRay','Dodger']
+        self.keys = [pygame.K_1,pygame.K_2,pygame.K_3]
     def saveLevel(self):
         file = open('LevelMap.txt','a')
         text = "\n"+self.name+":"
@@ -35,6 +33,11 @@ class LevelEditor():
         for e in entities:
             if not isinstance(e,Player):
                 rect = pygame.Rect(e.x,e.y,e.length,e.height)
+                newRect = pygame.Rect(x,y,e.length,e.height)
+                if rect.colliderect(newRect):
+                    return False
+            if isinstance(e,Player):
+                rect = pygame.Rect(0,e.y,self.width,self.height)
                 newRect = pygame.Rect(x,y,e.length,e.height)
                 if rect.colliderect(newRect):
                     return False

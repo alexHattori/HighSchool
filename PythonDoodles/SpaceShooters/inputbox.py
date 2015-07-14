@@ -1,17 +1,3 @@
-# by Timothy Downs, inputbox written for my map editor
-
-# This program needs a little cleaning up
-# It ignores the shift key
-# And, for reasons of my own, this program converts "-" to "_"
-
-# A program to get user input, allowing backspace etc
-# shown in a box in the middle of the screen
-# Called by:
-# import inputbox
-# answer = inputbox.ask(screen, "Your name")
-#
-# Only near the center of the screen is blitted to
-
 import pygame, pygame.font, pygame.event, pygame.draw, string
 from pygame.locals import *
 
@@ -25,7 +11,7 @@ def get_key():
 
 def display_box(screen, message):
   "Print a message in a box in the middle of the screen"
-  fontobject = pygame.font.Font(None,18)
+  fontobject = pygame.font.SysFont("monospace", 12)
   pygame.draw.rect(screen, (0,0,0),
                    ((screen.get_width() / 2) - 100,
                     (screen.get_height() / 2) - 10,

@@ -1,5 +1,5 @@
 import pygame,time,sys
-from Characters import Invader,Laser,Player
+from Characters import Invader,Laser,Player,DeathRay,Dodger
 
 def strToClass(str):
     return getattr(sys.modules[__name__], str)

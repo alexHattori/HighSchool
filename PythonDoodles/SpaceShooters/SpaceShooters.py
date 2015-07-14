@@ -15,9 +15,10 @@ option = 0
 MENU = 0
 LEVEL_SELECT = 1
 PLAY = 2
-DONE = 3
-DESIGN_LEVEL = 4
-QUIT = 5
+WIN = 3
+LOSE = 4
+DESIGN_LEVEL = 5
+QUIT = 6
 
 lvlMg = LevelManager.LevelManager(screen,width,height)
 lvlEd = LevelEditor.LevelEditor(screen,width,height)
@@ -27,16 +28,16 @@ bg = pygame.image.load('bg.jpg')
 sbg = pygame.transform.scale(bg,(width,height))
 bgLoc = (0,0)
 
-
-def displayLabels(screen,texts,selected):
+def displayLabels(screen,texts,selected,start = 0):
     labels = []
-    hei = int(height/len(texts))
+    tempH = height-start
+    hei = int(tempH/len(texts))
     le = 0
     selectedColor = (0,255,0)
     otherColor = (255,0,0)
-    startLoc = height-hei*len(texts)
+    startLoc = (height-hei*len(texts))-start
     for a in range(0,len(texts)):
-        if len(texts)<=5:
+        if len(texts)<=3:
             fontSize = width/len(options[a])
         else:
             fontSize = (height/len(texts)) - 10
@@ -81,16 +82,19 @@ while running:
         pygame.display.set_caption('Space Shooters')
         val = lvlMg.runLevel(curLevel)
         if val:
-            pygame.display.set_caption('You Lost')
+            myState = LOSE
         else:
-            pygame.display.set_caption('You Won')
-        myState = DONE
-    if myState == DONE:
+            myState = WIN
+    if myState == WIN or myState == LOSE:
+        if myState == WIN:
+            pygame.display.set_caption('You Win!')
+        elif myState == LOSE:
+            pygame.display.set_caption('You Lose!')
         options = ['Menu','Quit']
         outcomes = [MENU,QUIT]
         if(option>=len(options)):
             option = 0
-        displayLabels(screen,options,option)
+        displayLabels(screen,options,option,200)
     if myState == DESIGN_LEVEL:
         lvlEd.designLevel()
         myState = MENU
@@ -104,18 +108,18 @@ while running:
             pygame.display.quit()
         if event.type == pygame.KEYUP and event.key == pygame.K_RETURN:
             
-            if myState == MENU or myState == LEVEL_SELECT or myState == DONE:
+            if myState == MENU or myState == LEVEL_SELECT or myState == WIN or myState == LOSE:
                 myState = outcomes[option]
             if myState == PLAY:
                 curLevel = getLevelOptions()[0][option]
         if event.type == pygame.KEYUP and event.key == pygame.K_DOWN:
-            if myState == MENU or myState == LEVEL_SELECT or myState == DONE:
+            if myState == MENU or myState == LEVEL_SELECT or myState == WIN or myState == LOSE:
                 if(option == len(options)-1):
                     option = 0
                 else:
                     option+=1
         if event.type == pygame.KEYUP and event.key == pygame.K_UP:
-            if myState == MENU or myState == LEVEL_SELECT or myState == DONE:
+            if myState == MENU or myState == LEVEL_SELECT or myState == WIN or myState == LOSE:
                 if(option == 0):
                     option = len(options)-1
                 else:
