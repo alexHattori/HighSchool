@@ -1,4 +1,2 @@
-level1:Player(60;470),Invader(56;58),Invader(129;77),Invader(160;83)
-hello world:Player(60;470),Invader(72;72),DeathRay(272;121),Invader(230;270),DeathRay(374;163),Invader(144;77),DeathRay(143;143),DeathRay(441;100),DeathRay(425;330),DeathRay(143;316),Invader(9;205),DeathRay(88;311),Invader(301;45),DeathRay(349;270)
-test:Player(60;470),Dodger(327;180),Dodger(230;286),Dodger(74;198),Invader(231;95),Invader(99;68),DeathRay(434;78)
-dodger:Player(60;470),Dodger(171;156),Dodger(301;154),Dodger(236;298),Dodger(75;268)
+level1:Player(60;470),Invader(82;189),DeathRay(214;197),Dodger(326;191)
+level2:Player(60;470),Invader(216;72),Invader(230;136),Invader(229;205),Invader(229;266),Invader(230;332),DeathRay(318;89),DeathRay(320;128),DeathRay(332;203),DeathRay(331;259),DeathRay(326;335),DeathRay(133;80),DeathRay(136;139),DeathRay(135;200),DeathRay(150;258),DeathRay(152;328),Dodger(428;94),Dodger(428;139),Dodger(423;207),Dodger(423;258),Dodger(423;348),Dodger(25;78),Dodger(59;163),Dodger(61;216),Dodger(62;259),Dodger(75;338)

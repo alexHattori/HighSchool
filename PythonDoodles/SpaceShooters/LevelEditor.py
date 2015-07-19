@@ -19,7 +19,7 @@ class LevelEditor():
         self.keys = [pygame.K_1,pygame.K_2,pygame.K_3]
     def saveLevel(self):
         file = open('LevelMap.txt','a')
-        text = "\n"+self.name+":"
+        text = "\n" + self.name+":"
         for x in self.entities:
             text+= x.__class__.__name__
             text+=('(')
