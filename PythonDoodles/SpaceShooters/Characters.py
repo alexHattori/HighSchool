@@ -77,6 +77,10 @@ class Dodger(Invader):
         if not move:
             self.speed = 5
         super(Dodger,self).update()
+    def shoot(self):
+        self.delay = self.maxDelay
+        l = Missle(self.x+self.length/2,self.y+self.height,False,self.entities,self.screen,self.screenWidth,self.screenHeight)
+        self.entities.append(l)
     def display(self):
         self.rect = pygame.Rect(self.x,self.y,self.length,self.height)
         pygame.draw.rect(self.screen,(255,0,255),self.rect)
@@ -117,9 +121,8 @@ class Laser(object):
             if(isinstance(b,Player)):
                 if(b.rect.colliderect(self.rect) and not self.player):
                     b.dead = True
-                    self.dead = True
-##          Add New Enemies Here  
-            elif(isinstance(b,Invader)): ## or isinstance(b,DeathRay)
+                    self.dead = True  
+            elif(isinstance(b,Invader)):
                 if(b.rect.colliderect(self.rect) and self.player):
                     b.dead = True
                     self.dead = True
@@ -152,11 +155,30 @@ class Beam(Laser):
                 if(b.rect.colliderect(self.rect) and not self.player):
                     b.dead = True
                     self.dead = True
-##          Add New Enemies Here  
-            elif(isinstance(b,Invader)): ## or isinstance(b,DeathRay)
+            elif(isinstance(b,Invader)):
                 if(b.rect.colliderect(self.rect) and self.player):
                     b.dead = True
                     self.dead = True
+class Missle(Laser):
+    def __init__(self,x,y,player,entities,screen,screenWidth,screenHeight):
+        super(Missle,self).__init__(x,y,player,entities,screen,screenWidth,screenHeight)
+        self.color = (255,255,255)
+        self.target = None
+        for x in self.entities:
+            if(isinstance(x,Player)):
+                self.target = x
+    def update(self):
+        if(self.target):
+            if abs(self.target.y-self.y)>30:
+                if(self.x>self.target.x):
+                    self.x-=self.speed/4
+                elif(self.x<self.target.x):
+                    self.x+=self.speed/4
+                else:
+                    self.x = self.target.x
+        super(Missle,self).update()
+        if(self.y+self.height>self.screenHeight):
+            self.dead = True
 class Player(object):
     def __init__(self,x,y,entities,screen,screenWidth,screenHeight):
         self.length = 30
