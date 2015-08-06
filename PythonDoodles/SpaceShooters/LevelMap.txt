@@ -1,3 +1,4 @@
 level1:Player(60;470),Invader(82;189),DeathRay(214;197),Dodger(326;191)
 level2:Player(60;470),Invader(216;72),Invader(230;136),Invader(229;205),Invader(229;266),Invader(230;332),DeathRay(318;89),DeathRay(320;128),DeathRay(332;203),DeathRay(331;259),DeathRay(326;335),DeathRay(133;80),DeathRay(136;139),DeathRay(135;200),DeathRay(150;258),DeathRay(152;328),Dodger(428;94),Dodger(428;139),Dodger(423;207),Dodger(423;258),Dodger(423;348),Dodger(25;78),Dodger(59;163),Dodger(61;216),Dodger(62;259),Dodger(75;338)
 beat it or you suck:Player(60;470),Invader(70;63)
+fghj:Player(60;470),Invader(32;111),DeathRay(144;131),Dodger(260;135)
