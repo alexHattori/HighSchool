@@ -5,7 +5,7 @@ screen = pygame.display.set_mode((width, height))
 running = True
 pygame.init()
 
-img = pygame.image.load('ClarkSprites.png')
+img = pygame.image.load('playersprites.bmp')
 screen.blit(img,(0,0))
 while running:
     screen.blit(img,(0,0))
